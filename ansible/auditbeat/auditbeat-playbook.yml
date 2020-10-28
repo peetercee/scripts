@@ -1,0 +1,34 @@
+---
+- name: Installing and Launch Auditbeat
+  hosts: webservers
+  become: yes
+  tasks:
+
+    # install Auditbeat
+    # Use command module
+  - name: Download Auditbeat .deb file
+    command: curl -L -O https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-7.6.1-amd64.deb
+
+    # Use command module
+  - name: Install Audit .deb
+    command: dpkg -i auditbeat-7.6.1-amd64.deb
+
+    # Copy metricbeat config file
+  - name: Drop in Audit.yml
+    copy:
+      src: /etc/auditbeat/auditbeat.yml
+      dest: /etc/auditbeat/auditbeat.yml
+
+    # Use command module
+  - name: setup auditbeat
+    command: auditbeat setup
+
+    # Setup auditbeat service
+  - name: Setup Auditbeat service
+    command: service auditbeat start
+
+    # Enable auditbeat service
+  - name: Enable auditbeat service
+    systemd:
+      name: auditbeat
+      enabled: yes
