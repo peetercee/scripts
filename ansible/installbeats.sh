@@ -1,17 +1,13 @@
 #!bin/bash
 
-ansible-playbook filebeat-playbook.yml
+#Install and configure filebeat
+ansible-playbook filebeat/filebeat-playbook.yml
 
-echo "done filebeat!"
+#Install and configure metricbeat
+ansible-playbook metricbeat/metricbeat-playbook.yml
 
-ansible-playbook metricbeat-playbook.yml
+#Install and configure auditbeat
+ansible-playbook auditbeat/auditbeat-playbook.yml
 
-echo "done metricbeat!"
-
-ansible-playbook auditbeat-playbook.yml
-
-echo "done auditbeat!"
-
-ansible-playbook packetbeat-playbook.yml
-
-echo "done packetbeat!"
+#Install and configure packetbeat
+ansible-playbook packetbeat/packetbeat-playbook.yml
