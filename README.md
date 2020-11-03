@@ -197,13 +197,12 @@ Ex:
 
 
 
-These files can be copied via git.  Run the commands below:
+These files can be copied via git and run via the commands below:
 ```
 $ cd /etc/ansible
-$ mkdir files
 # Clone Repository + IaC Files
-$ git clone https://github.com/yourusername/project-1.git
+$ git clone https://github.com/peetercee/scripts.git
 # Move Playbooks and hosts file Into `/etc/ansible`
-$ cp project-1/playbooks/* .
-$ cp project-1/files/* ./files
+$ cp -r scripts/ansible/* .
+$ sh installbeats.sh
 ```
