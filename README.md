@@ -199,6 +199,6 @@ $ cd /etc/ansible
 # Clone Repository + IaC Files
 $ git clone https://github.com/peetercee/scripts.git
 # Move Playbooks and hosts file Into `/etc/ansible`
-$ cp -r scripts/ansible/* .
+$ mv -r scripts/ansible/* .
 $ sh installbeats.sh
 ```
