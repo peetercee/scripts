@@ -2,14 +2,14 @@
 
 The files in this repository were used to configure the network depicted below.
 
-![](diagrams/network2.png)
+![](diagrams/network3.png)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the installbeats.sh file can be used to intall portions of the ELK server such as filebeat.
 
 
 
 This document contains the following details:
-- Description of the Topologu
+- Description of the Topology
 - Access Policies
 - ELK Configuration
   - Beats in Use
@@ -21,7 +21,7 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly available, in addition to restricting inbound to the network.  Load balancers distributes the traffic among the 3 webservers endureing that only authorized users will be able to access the virtual machines.
+Load balancing ensures that the application will be highly available, in addition to restricting inbound access to the network.  Load balancers distribute the traffic among the three webservers endureing that only authorized users will be able to access the virtual machines.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file system and system metrics such as CPU usage, logins, sudo escalation attempts and more.
 
@@ -121,8 +121,7 @@ A summary of the access policies in place can be found in the table below.
 
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- The advantage of using Ansible is that the condfiguration can be repeated automatically as new machines are added.  Also if updates need to be made the changes can take place in one file and then run to updated the individual machines.
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because using the configuration can be repeated automatically as new machines are added.  Also if updates need to be made the changes can take place in one file and then run to updated the individual machines.
 
 The playbook implements the following tasks:
 - Install docker
@@ -165,8 +164,8 @@ SSH into the control node and follow the steps below:
 ```
 
 - Copy the playbook files to the appriopriate directories in /etc/ansible (ex.: /etc/ansible/filebeat/filebeat-playbook.yml).
-- Update the configuration files for each beat to include the ELK server hosts information
-- Copy the configuration files to the appropriuate directory within /etc/ansible (ex: /etc/filebeat/filebeat.yml)
+- Update the configuration files for each beat to include the ELK server host information
+- Copy the configuration files to the appropriuate directory within /etc/ansible (ex: /etc/ansible/filebeat/filebeat.yml)
 - Copt installbeats.sh to the /etc/ansible directory.  The file looks like this:
 ```
 #!bin/bash
