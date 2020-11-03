@@ -25,9 +25,9 @@ Load balancing ensures that the application will be highly available, in additio
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file system and system metrics such as CPU usage, logins, sudo escalation attempts and more.
 -Filebeat watches for changes to the file systems on the VMs
--Metricbeat
--Packetbeat
--auditbeat
+-Metricbeat fsfsdfsdfsdf
+-Packetbeat ddgdfgdffddfg
+-auditbeat dfgdfgdfgdfgf
 
 The configuration details of each machine may be found below.
 
@@ -107,51 +107,77 @@ To use this playbook, one must log into the Jump Box, then issue: ansible-playbo
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the jump box machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+- 72.229.144.217
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+Machines within the network can only be accessed by each other.
+- Web1 Web2, and Web3 send traffic to the ELK Server
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Name       | Publicly Accessible | Allowed IP Addresses |
+|------------|---------------------|----------------------|
+| Jump Box   | Yes                 | 72.229.144.217       |
+| Web1       | No                  | 10.0.0.1-254         |
+| Web2       | No                  | 10.0.0.1-254         |
+| Web3       | No                  | 10.0.0.1-254         |
+| Elk-Server | Yes                 | 71.229.144.217       |
 
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+- The advantage of using Ansible is that the condfiguration can be repeated automatically as new machines are added.  Also if updates need to be made the changes can take place in one file and then run to updated the individual machines.
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+- Install docker
+- Install python
+- Install Docker python module
+- Increase virtual memory
+- Download and launch a docker ELK container
+- Enable docker service
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-
+![](diagrams/elk.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+- 10.0.0.7
+- 10.0.0.8
+- 10.0.0.9
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+- Filebeat - Detects changes to the filesystem.  Collects Apache logs
+- Metricbeat - Detects changes in filesystem metrics such as CPU usage SSH login attempts, failed sudo escalations and CPU/RAM statistics
+- Auditbeat - 
+- Packetbeat - Collects packets that pass througgh the NIC, similar to Wireshark.  This traces all activity that takes place on the network.
 
-These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
 
 ### Using the Playbook
-In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
+In order to use the playbooks, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- update hosts file within /etc/ansible and include the IPs of the Webservers
+  ```
+  # Ex 2: A collection of hosts belonging to the 'webservers' group
+
+[webservers]
+## alpha.example.org
+## beta.example.org
+## 192.168.1.100
+## 192.168.1.110
+10.0.0.8 ansible_python_interpreter=/usr/bin/python3
+10.0.0.7 ansible_python_interpreter=/usr/bin/python3
+10.0.0.9 ansible_python_interpreter=/usr/bin/python3
+
+[elk]
+10.1.0.5 ansible_python_interpreter=/usr/bin/python3
+```
+
+- Copy the playbook file to the /etc/ansible directory.
+- Update the configuration files for each beat to include the ELK server hosts information
+- Copy the configuration files to the appropriuate directory within /etc/ansible (ex: /etc/filebeat/filebeat.yml)
+- Run the playbook, and navigate to http://20.51.120.6:5601/app/kibana#/home
 
 _TODO: Answer the following questions to fill in the blanks:_
 - _Which file is the playbook? Where do you copy it?_
