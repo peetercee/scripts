@@ -193,8 +193,17 @@ Ex:
 #Install and configure packetbeat
 #ansible-playbook packetbeat/packetbeat-playbook.yml
 ```
-- Run the playbook, and navigate to http://20.51.120.6:5601/app/kibana#/home
+- Run installbeats.sh, and navigate to http://20.51.120.6:5601/app/kibana#/home
 
 
 
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+These files can be copied via git.  Run the commands below:
+```
+$ cd /etc/ansible
+$ mkdir files
+# Clone Repository + IaC Files
+$ git clone https://github.com/yourusername/project-1.git
+# Move Playbooks and hosts file Into `/etc/ansible`
+$ cp project-1/playbooks/* .
+$ cp project-1/files/* ./files
+```
