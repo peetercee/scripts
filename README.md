@@ -21,23 +21,26 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+Load balancing ensures that the application will be highly available, in addition to restricting inbound to the network.  Load balancers distributes the traffic among the 3 webservers endureing that only authorized users will be able to access the virtual machines.
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file system and system metrics such as CPU usage, logins, sudo escalation attempts and more.
+-Filebeat watches for changes to the file systems on the VMs
+-Metricbeat
+-Packetbeat
+-auditbeat
 
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-| Name     | Function | IP Address | Operating System |
-|----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.1   | Linux            |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
-
+| Name       | Function   | IP Address | Operating System |
+|------------|------------|------------|------------------|
+| Jump Box   | Gateway    | 10.0.0.5   | Linux            |
+| Web1       | Web Server | 10.0.0.7   | Linux            |
+| web2       | Web Server | 10.0.0.8   | Linux            |
+| Web3       | Web Server | 10.0.0.9   | Linux            |
+| Elk-Server | Elk Server | 10.1.0.5   | Linux            |
+ 
+ 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
