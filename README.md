@@ -24,10 +24,6 @@ The main purpose of this network is to expose a load-balanced and monitored inst
 Load balancing ensures that the application will be highly available, in addition to restricting inbound to the network.  Load balancers distributes the traffic among the 3 webservers endureing that only authorized users will be able to access the virtual machines.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file system and system metrics such as CPU usage, logins, sudo escalation attempts and more.
--Filebeat watches for changes to the file systems on the VMs
--Metricbeat fsfsdfsdfsdf
--Packetbeat ddgdfgdffddfg
--auditbeat dfgdfgdfgdfgf
 
 The configuration details of each machine may be found below.
 
@@ -149,7 +145,7 @@ This ELK server is configured to monitor the following machines:
 We have installed the following Beats on these machines:
 - Filebeat - Detects changes to the filesystem.  Collects Apache logs
 - Metricbeat - Detects changes in filesystem metrics such as CPU usage SSH login attempts, failed sudo escalations and CPU/RAM statistics
-- Auditbeat - 
+- Auditbeat - Audits the activities of users and processes from the Linux Audit Framework. Detect changes to critical files, like binaries and configuration files.
 - Packetbeat - Collects packets that pass througgh the NIC, similar to Wireshark.  This traces all activity that takes place on the network.
 
 
