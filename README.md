@@ -4,9 +4,9 @@ The files in this repository were used to configure the network depicted below.
 
 ![](diagrams/network2.png)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the installbeats.sh file can be used to intall portions of the ELK server such as filebeat.
 
-  - _TODO: Enter the playbook file._
+
 
 This document contains the following details:
 - Description of the Topologu
@@ -30,7 +30,6 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 -auditbeat
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name       | Function   | IP Address | Operating System |
 |------------|------------|------------|------------------|
@@ -40,6 +39,69 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 | Web3       | Web Server | 10.0.0.9   | Linux            |
 | Elk-Server | Elk Server | 10.1.0.5   | Linux            |
  
+### ELK Server Configuration
+The ELK VM exposes an Elastic Stack instance. Docker is used to download and manage an ELK container.
+
+Rather than configure ELK manually, we opted to develop a reusable Ansible Playbook to accomplish the task. This playbook is duplicated below.
+
+To use this playbook, one must log into the Jump Box, then issue: ansible-playbook elk.yml. This runs the elk.yml playbook on the elk host. 
+
+---
+- name: Configure Elk VM with Docker
+  hosts: elk
+  remote_user: sysadmin
+  become: true
+  tasks:
+    # Use apt module
+    - name: Install docker.io
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+        name: docker.io
+        state: present
+
+      # Use apt module
+    - name: Install pip3
+      apt:
+        force_apt_get: yes
+        name: python3-pip
+        state: present
+
+      # Use pip module
+    - name: Install Docker python module
+      pip:
+        name: docker
+        state: present
+
+      # Use command module
+    - name: Increase virtual memory
+      command: sysctl -w vm.max_map_count=262144
+
+      # Use sysctl module
+    - name: Use more memory
+      sysctl:
+        name: vm.max_map_count
+        value: "262144"
+        state: present
+        reload: yes
+
+      # Use docker_container module
+    - name: download and launch a docker elk container
+      docker_container:
+        name: elk
+        image: sebp/elk:761
+        state: started
+        restart_policy: always
+        published_ports:
+          - 5601:5601
+          - 9200:9200
+          - 5044:5044
+
+      # Enable docker service
+    - name: Enable docker service
+      systemd:
+        name: docker
+        enabled: yes
  
 ### Access Policies
 
