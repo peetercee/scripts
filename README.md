@@ -21,7 +21,7 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly available, in addition to restricting inbound access to the network.  Load balancers distribute the traffic among the three webservers ensureing that only authorized users will be able to access the virtual machines.
+Load balancing ensures that the application will be highly available, in addition to restricting inbound access to the network.  Load balancers distribute the traffic among the three webservers ensuring that only authorized users will be able to access the virtual machines.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file system and system metrics such as CPU usage, logins, sudo escalation attempts and more.
 
