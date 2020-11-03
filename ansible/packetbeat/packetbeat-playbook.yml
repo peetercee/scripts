@@ -15,7 +15,7 @@
     # Copy metricbeat config file
   - name: Drop in packetbeat.yml
     copy:
-      src: /etc/ansible/files/packetbeat.yml
+      src: /etc/ansible/packetbeat/packetbeat.yml
       dest: /etc/packetbeat/packetbeat.yml
 
     # Setup Packetbeat
