@@ -168,14 +168,33 @@ SSH into the control node and follow the steps below:
 10.1.0.5 ansible_python_interpreter=/usr/bin/python3
 ```
 
-- Copy the playbook file to the /etc/ansible directory.
+- Copy the playbook files to the appriopriate directories in /etc/ansible (ex.: /etc/ansible/filebeat/filebeat-playbook.yml).
 - Update the configuration files for each beat to include the ELK server hosts information
 - Copy the configuration files to the appropriuate directory within /etc/ansible (ex: /etc/filebeat/filebeat.yml)
+- Copt installbeats.sh to the /etc/ansible directory.  The file looks like this:
+```
+#!bin/bash
+
+#Install and configure filebeat
+ansible-playbook filebeat/filebeat-playbook.yml
+
+#Install and configure metricbeat
+ansible-playbook metricbeat/metricbeat-playbook.yml
+
+#Install and configure auditbeat
+ansible-playbook auditbeat/auditbeat-playbook.yml
+
+#Install and configure packetbeat
+ansible-playbook packetbeat/packetbeat-playbook.yml
+```
+This will install all 4 beats on the webservers.  If you do not want to install an specific beat just comment out the line containing it.
+Ex:
+```
+#Install and configure packetbeat
+#ansible-playbook packetbeat/packetbeat-playbook.yml
+```
 - Run the playbook, and navigate to http://20.51.120.6:5601/app/kibana#/home
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
+
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
