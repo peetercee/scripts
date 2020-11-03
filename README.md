@@ -158,14 +158,8 @@ In order to use the playbooks, you will need to have an Ansible control node alr
 
 SSH into the control node and follow the steps below:
 - update hosts file within /etc/ansible and include the IPs of the Webservers
-  ```
-  # Ex 2: A collection of hosts belonging to the 'webservers' group
-
+``` 
 [webservers]
-## alpha.example.org
-## beta.example.org
-## 192.168.1.100
-## 192.168.1.110
 10.0.0.8 ansible_python_interpreter=/usr/bin/python3
 10.0.0.7 ansible_python_interpreter=/usr/bin/python3
 10.0.0.9 ansible_python_interpreter=/usr/bin/python3
