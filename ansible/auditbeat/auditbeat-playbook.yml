@@ -16,7 +16,7 @@
     # Copy metricbeat config file
   - name: Drop in Audit.yml
     copy:
-      src: /etc/auditbeat/auditbeat.yml
+      src: /etc/ansible/files/auditbeat.yml
       dest: /etc/auditbeat/auditbeat.yml
 
     # Use command module
